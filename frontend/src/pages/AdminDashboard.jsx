@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { format } from 'date-fns';
 
 const AdminDashboard = () => {
@@ -71,7 +71,7 @@ const AdminDashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/admin/reservations/${id}`, {
+      await api.delete(`/api/admin/reservations/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Reservation cancelled successfully');
@@ -94,7 +94,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`/api/admin/reservations/${editingReservation._id}`, editFormData, {
+      await api.put(`/api/admin/reservations/${editingReservation._id}`, editFormData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Reservation updated successfully');
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
   const handleUpdateTable = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/tables/${editingTable._id}`, tableFormData);
+      await api.put(`/api/tables/${editingTable._id}`, tableFormData);
       setSuccess('Table updated successfully');
       setEditingTable(null);
       setTableFormData({ tableNumber: '', capacity: '', status: 'available' });
@@ -144,7 +144,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this table?')) return;
 
     try {
-      await axios.delete(`/api/tables/${id}`);
+      await api.delete(`/api/tables/${id}`);
       setSuccess('Table deleted successfully');
       fetchData();
     } catch (err) {

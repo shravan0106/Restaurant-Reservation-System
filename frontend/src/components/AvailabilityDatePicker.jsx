@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { format, isSameDay } from 'date-fns';
 
 const AvailabilityDatePicker = ({ value, onChange, guestCount }) => {

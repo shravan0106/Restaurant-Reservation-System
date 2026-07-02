@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { format } from 'date-fns';
 import AvailabilityDatePicker from '../components/AvailabilityDatePicker';
@@ -66,7 +66,7 @@ const CustomerDashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/reservations/${id}`, {
+      await api.delete(`/api/reservations/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Reservation cancelled successfully');

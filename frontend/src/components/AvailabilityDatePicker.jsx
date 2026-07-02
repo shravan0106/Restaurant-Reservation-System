@@ -26,7 +26,7 @@ const AvailabilityDatePicker = ({ value, onChange, guestCount }) => {
         const startDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
         const endDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
         
-        const response = await axios.get('/api/reservations/availability', {
+        const response = await api.get('/api/reservations/availability', {
           params: {
             startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],

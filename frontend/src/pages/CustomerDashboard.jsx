@@ -24,7 +24,7 @@ const CustomerDashboard = () => {
   const fetchReservations = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/reservations', {
+      const response = await api.get('/api/reservations', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReservations(response.data.reservations);
@@ -42,7 +42,7 @@ const CustomerDashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('/api/reservations', formData, {
+      const response = await api.post('/api/reservations', formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const reservation = response.data.reservation;

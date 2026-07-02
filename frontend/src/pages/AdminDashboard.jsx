@@ -40,12 +40,12 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const [reservationsRes, tablesRes, statsRes] = await Promise.all([
-        axios.get('/api/admin/reservations', {
+        api.get('/api/admin/reservations', {
           headers: { Authorization: `Bearer ${token}` },
           params: { date: filterDate, status: filterStatus }
         }),
-        axios.get('/api/tables'),
-        axios.get('/api/admin/stats', {
+        api.get('/api/tables'),
+        api.get('/api/admin/stats', {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -108,7 +108,7 @@ const AdminDashboard = () => {
   const handleCreateTable = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/tables', tableFormData);
+      await api.post('/api/tables', tableFormData);
       setSuccess('Table created successfully');
       setTableFormData({ tableNumber: '', capacity: '', status: 'available' });
       setShowTableForm(false);

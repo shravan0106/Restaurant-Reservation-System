@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/auth/me', {
+      const response = await  api.get('/api/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(response.data.user);
@@ -32,14 +32,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/auth/login', { email, password });
+    const response = await api.post('/api/auth/login', { email, password });
     localStorage.setItem('token', response.data.token);
     setUser(response.data.user);
     return response.data;
   };
 
   const register = async (name, email, password) => {
-    const response = await axios.post('/api/auth/register', { name, email, password });
+    const response = await api.post('/api/auth/register', { name, email, password });
     localStorage.setItem('token', response.data.token);
     setUser(response.data.user);
     return response.data;
